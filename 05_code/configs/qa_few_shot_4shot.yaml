@@ -1,0 +1,11 @@
+name: qa_few_shot_4shot
+task: qa
+technique: few_shot
+n_shots: 4
+dataset: trivia_qa
+dataset_split: validation
+sample_size: 200
+model: claude-sonnet-4-6
+temperature: 0.0
+max_tokens: 128
+output_file: ../../03_results/raw/qa_few_shot_4shot.jsonl
