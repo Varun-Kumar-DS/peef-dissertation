@@ -1,0 +1,251 @@
+{
+  "qa": {
+    "metric": "exact_match",
+    "means": {
+      "qa_cot": 0.66,
+      "qa_few_shot_4shot": 0.7,
+      "qa_zero_shot": 0.67,
+      "qa_zero_shot_cot": 0.365
+    },
+    "pairwise": [
+      {
+        "experiment_a": "qa_cot",
+        "experiment_b": "qa_few_shot_4shot",
+        "mean_a": 0.66,
+        "mean_b": 0.7,
+        "n_common": 200,
+        "wilcoxon_stat": 170.5,
+        "p_value": 0.144127,
+        "significant": false,
+        "cohens_d": -0.0856,
+        "effect_size": "negligible"
+      },
+      {
+        "experiment_a": "qa_cot",
+        "experiment_b": "qa_zero_shot",
+        "mean_a": 0.66,
+        "mean_b": 0.67,
+        "n_common": 200,
+        "wilcoxon_stat": 162.0,
+        "p_value": 0.694887,
+        "significant": false,
+        "cohens_d": -0.0211,
+        "effect_size": "negligible"
+      },
+      {
+        "experiment_a": "qa_cot",
+        "experiment_b": "qa_zero_shot_cot",
+        "mean_a": 0.66,
+        "mean_b": 0.365,
+        "n_common": 200,
+        "wilcoxon_stat": 304.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.6161,
+        "effect_size": "medium"
+      },
+      {
+        "experiment_a": "qa_few_shot_4shot",
+        "experiment_b": "qa_zero_shot",
+        "mean_a": 0.7,
+        "mean_b": 0.67,
+        "n_common": 200,
+        "wilcoxon_stat": 73.5,
+        "p_value": 0.179712,
+        "significant": false,
+        "cohens_d": 0.0645,
+        "effect_size": "negligible"
+      },
+      {
+        "experiment_a": "qa_few_shot_4shot",
+        "experiment_b": "qa_zero_shot_cot",
+        "mean_a": 0.7,
+        "mean_b": 0.365,
+        "n_common": 200,
+        "wilcoxon_stat": 552.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.711,
+        "effect_size": "medium"
+      },
+      {
+        "experiment_a": "qa_zero_shot",
+        "experiment_b": "qa_zero_shot_cot",
+        "mean_a": 0.67,
+        "mean_b": 0.365,
+        "n_common": 200,
+        "wilcoxon_stat": 410.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.6393,
+        "effect_size": "medium"
+      }
+    ]
+  },
+  "summarisation": {
+    "metric": "rougeL_f",
+    "means": {
+      "summarisation_cot": 0.2051,
+      "summarisation_few_shot_4shot": 0.2271,
+      "summarisation_zero_shot": 0.238,
+      "summarisation_zero_shot_cot": 0.2024
+    },
+    "pairwise": [
+      {
+        "experiment_a": "summarisation_cot",
+        "experiment_b": "summarisation_few_shot_4shot",
+        "mean_a": 0.2051,
+        "mean_b": 0.2271,
+        "n_common": 200,
+        "wilcoxon_stat": 5234.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": -0.3366,
+        "effect_size": "small"
+      },
+      {
+        "experiment_a": "summarisation_cot",
+        "experiment_b": "summarisation_zero_shot",
+        "mean_a": 0.2051,
+        "mean_b": 0.238,
+        "n_common": 200,
+        "wilcoxon_stat": 3595.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": -0.5162,
+        "effect_size": "medium"
+      },
+      {
+        "experiment_a": "summarisation_cot",
+        "experiment_b": "summarisation_zero_shot_cot",
+        "mean_a": 0.2051,
+        "mean_b": 0.2024,
+        "n_common": 200,
+        "wilcoxon_stat": 9312.0,
+        "p_value": 0.367861,
+        "significant": false,
+        "cohens_d": 0.0517,
+        "effect_size": "negligible"
+      },
+      {
+        "experiment_a": "summarisation_few_shot_4shot",
+        "experiment_b": "summarisation_zero_shot",
+        "mean_a": 0.2271,
+        "mean_b": 0.238,
+        "n_common": 200,
+        "wilcoxon_stat": 7321.0,
+        "p_value": 0.001729,
+        "significant": true,
+        "cohens_d": -0.1519,
+        "effect_size": "negligible"
+      },
+      {
+        "experiment_a": "summarisation_few_shot_4shot",
+        "experiment_b": "summarisation_zero_shot_cot",
+        "mean_a": 0.2271,
+        "mean_b": 0.2024,
+        "n_common": 200,
+        "wilcoxon_stat": 4946.5,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.3907,
+        "effect_size": "small"
+      },
+      {
+        "experiment_a": "summarisation_zero_shot",
+        "experiment_b": "summarisation_zero_shot_cot",
+        "mean_a": 0.238,
+        "mean_b": 0.2024,
+        "n_common": 200,
+        "wilcoxon_stat": 3031.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.5776,
+        "effect_size": "medium"
+      }
+    ]
+  },
+  "reasoning": {
+    "metric": "exact_match",
+    "means": {
+      "reasoning_cot": 0.9,
+      "reasoning_few_shot_4shot": 0.575,
+      "reasoning_zero_shot": 0.65,
+      "reasoning_zero_shot_cot": 0.825
+    },
+    "pairwise": [
+      {
+        "experiment_a": "reasoning_cot",
+        "experiment_b": "reasoning_few_shot_4shot",
+        "mean_a": 0.9,
+        "mean_b": 0.575,
+        "n_common": 200,
+        "wilcoxon_stat": 378.0,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.7929,
+        "effect_size": "medium"
+      },
+      {
+        "experiment_a": "reasoning_cot",
+        "experiment_b": "reasoning_zero_shot",
+        "mean_a": 0.9,
+        "mean_b": 0.65,
+        "n_common": 200,
+        "wilcoxon_stat": 152.5,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": 0.6259,
+        "effect_size": "medium"
+      },
+      {
+        "experiment_a": "reasoning_cot",
+        "experiment_b": "reasoning_zero_shot_cot",
+        "mean_a": 0.9,
+        "mean_b": 0.825,
+        "n_common": 200,
+        "wilcoxon_stat": 84.0,
+        "p_value": 0.003892,
+        "significant": true,
+        "cohens_d": 0.2185,
+        "effect_size": "small"
+      },
+      {
+        "experiment_a": "reasoning_few_shot_4shot",
+        "experiment_b": "reasoning_zero_shot",
+        "mean_a": 0.575,
+        "mean_b": 0.65,
+        "n_common": 200,
+        "wilcoxon_stat": 384.0,
+        "p_value": 0.028671,
+        "significant": true,
+        "cohens_d": -0.154,
+        "effect_size": "negligible"
+      },
+      {
+        "experiment_a": "reasoning_few_shot_4shot",
+        "experiment_b": "reasoning_zero_shot_cot",
+        "mean_a": 0.575,
+        "mean_b": 0.825,
+        "n_common": 200,
+        "wilcoxon_stat": 722.5,
+        "p_value": 0.0,
+        "significant": true,
+        "cohens_d": -0.5656,
+        "effect_size": "medium"
+      },
+      {
+        "experiment_a": "reasoning_zero_shot",
+        "experiment_b": "reasoning_zero_shot_cot",
+        "mean_a": 0.65,
+        "mean_b": 0.825,
+        "n_common": 200,
+        "wilcoxon_stat": 544.0,
+        "p_value": 1.9e-05,
+        "significant": true,
+        "cohens_d": -0.4048,
+        "effect_size": "small"
+      }
+    ]
+  }
+}

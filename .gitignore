@@ -22,6 +22,7 @@ htmlcov/
 
 # PEEF cache (run artefacts — don't commit)
 05_code/.cache/
+.cache/
 
 # Results (raw API outputs — large, tracked separately)
 03_results/raw/

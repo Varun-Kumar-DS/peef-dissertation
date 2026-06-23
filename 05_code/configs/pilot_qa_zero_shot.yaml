@@ -1,11 +1,11 @@
-name: qa_zero_shot
+name: pilot_qa_zero_shot
 task: qa
 technique: zero_shot
 n_shots: 0
 dataset: trivia_qa
 dataset_split: validation
-sample_size: 200
+sample_size: 10
 model: claude-haiku-4-5-20251001
 temperature: 0.0
 max_tokens: 128
-output_file: 03_results/raw/qa_zero_shot.jsonl
+output_file: 03_results/raw/pilot_qa_zero_shot.jsonl

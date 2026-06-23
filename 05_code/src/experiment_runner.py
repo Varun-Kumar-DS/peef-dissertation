@@ -82,7 +82,13 @@ class ExperimentRunner:
         self.cache_dir = Path(self.cache_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        self._client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        from dotenv import load_dotenv
+        from pathlib import Path as _Path
+        load_dotenv(_Path(__file__).parent.parent.parent / ".env")
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise EnvironmentError("ANTHROPIC_API_KEY not found in .env file.")
+        self._client = anthropic.Anthropic(api_key=api_key)
         self._cache: set[str] = self._load_cache()
 
     # ── public API ──────────────────────────────────────────────────────────
@@ -112,7 +118,7 @@ class ExperimentRunner:
         import datetime
 
         prompt = item["prompt"]
-        model = self.config.get("model", "claude-sonnet-4-6")
+        model = self.config.get("model", "claude-haiku-4-5-20251001")
         temperature = self.config.get("temperature", 0.0)
         max_tokens = self.config.get("max_tokens", 512)
 
@@ -125,7 +131,8 @@ class ExperimentRunner:
                     messages=[{"role": "user", "content": prompt}],
                 )
                 response_text = message.content[0].text
-                usage = message.usage
+                in_tok  = message.usage.input_tokens
+                out_tok = message.usage.output_tokens
                 return ExperimentResult(
                     run_id=item["run_id"],
                     config_name=self.config.get("name", "unnamed"),
@@ -136,34 +143,35 @@ class ExperimentRunner:
                     temperature=temperature,
                     prompt=prompt,
                     response=response_text,
-                    input_tokens=usage.input_tokens,
-                    output_tokens=usage.output_tokens,
-                    total_tokens=usage.input_tokens + usage.output_tokens,
+                    input_tokens=in_tok,
+                    output_tokens=out_tok,
+                    total_tokens=in_tok + out_tok,
                     timestamp=datetime.datetime.utcnow().isoformat(),
                     metadata=item.get("metadata", {}),
                 )
-            except anthropic.RateLimitError:
-                delay = self.base_delay * (2 ** attempt)
-                print(f"[RATE LIMIT] Attempt {attempt + 1}/{self.max_retries}. Waiting {delay}s...")
-                time.sleep(delay)
-            except anthropic.APIError as exc:
-                print(f"[API ERROR] {exc}")
-                return ExperimentResult(
-                    run_id=item["run_id"],
-                    config_name=self.config.get("name", "unnamed"),
-                    task=self.config["task"],
-                    technique=self.config["technique"],
-                    n_shots=self.config.get("n_shots", 0),
-                    model=model,
-                    temperature=temperature,
-                    prompt=prompt,
-                    response="",
-                    input_tokens=0,
-                    output_tokens=0,
-                    total_tokens=0,
-                    timestamp="",
-                    error=str(exc),
-                )
+            except Exception as exc:
+                if "quota" in str(exc).lower() or "rate" in str(exc).lower():
+                    delay = self.base_delay * (2 ** attempt)
+                    print(f"[RATE LIMIT] Attempt {attempt + 1}/{self.max_retries}. Waiting {delay}s...")
+                    time.sleep(delay)
+                else:
+                    print(f"[API ERROR] {exc}")
+                    return ExperimentResult(
+                        run_id=item["run_id"],
+                        config_name=self.config.get("name", "unnamed"),
+                        task=self.config["task"],
+                        technique=self.config["technique"],
+                        n_shots=self.config.get("n_shots", 0),
+                        model=model,
+                        temperature=temperature,
+                        prompt=prompt,
+                        response="",
+                        input_tokens=0,
+                        output_tokens=0,
+                        total_tokens=0,
+                        timestamp="",
+                        error=str(exc),
+                    )
         raise RuntimeError(f"Max retries exceeded for run_id={item['run_id']}")
 
     def _save_result(self, result: ExperimentResult) -> None:

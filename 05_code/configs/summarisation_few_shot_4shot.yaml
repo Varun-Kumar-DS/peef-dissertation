@@ -1,0 +1,11 @@
+name: summarisation_few_shot_4shot
+task: summarisation
+technique: few_shot
+n_shots: 2
+dataset: cnn_dailymail
+dataset_split: validation
+sample_size: 200
+model: claude-haiku-4-5-20251001
+temperature: 0.0
+max_tokens: 256
+output_file: 03_results/raw/summarisation_few_shot_4shot.jsonl

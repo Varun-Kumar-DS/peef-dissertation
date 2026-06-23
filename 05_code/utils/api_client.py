@@ -1,11 +1,12 @@
 """
-API Client utility — thin wrapper around the Anthropic SDK.
-Loads the API key from environment and exposes a simple call() function.
+API Client utility — Claude (Anthropic) wrapper for PEEF.
+Loads the API key from .env and exposes a simple call() function
+used by all PEEF modules.
 
 Setup:
-    1. Copy .env.example → .env
-    2. Add your ANTHROPIC_API_KEY
-    3. Run: pip install python-dotenv anthropic
+    1. Go to https://console.anthropic.com and get an API key
+    2. Add to .env:  ANTHROPIC_API_KEY=your-key-here
+    3. Run: pip install anthropic python-dotenv
 """
 
 from __future__ import annotations
@@ -16,9 +17,11 @@ from pathlib import Path
 import anthropic
 from dotenv import load_dotenv
 
-# Load .env from the project root (two levels up from this file)
-_env_path = Path(__file__).parent.parent / ".env"
+# Load .env from project root (three levels up from this file)
+_env_path = Path(__file__).parent.parent.parent / ".env"
 load_dotenv(_env_path)
+
+DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 
 
 def get_client() -> anthropic.Anthropic:
@@ -27,19 +30,19 @@ def get_client() -> anthropic.Anthropic:
     if not api_key:
         raise EnvironmentError(
             "ANTHROPIC_API_KEY not found. "
-            "Copy .env.example → .env and add your key."
+            "Add ANTHROPIC_API_KEY=your-key to your .env file."
         )
     return anthropic.Anthropic(api_key=api_key)
 
 
 def call(
     prompt: str,
-    model: str = "claude-sonnet-4-6",
+    model: str = DEFAULT_MODEL,
     max_tokens: int = 512,
     temperature: float = 0.0,
 ) -> tuple[str, int, int]:
     """
-    Single API call.
+    Single Claude API call.
 
     Returns
     -------
@@ -59,9 +62,12 @@ def call(
 def test_connection() -> None:
     """Quick smoke-test — prints model response and token count."""
     print("Testing Claude API connection...")
-    response, in_tok, out_tok = call("Say 'API connection successful' and nothing else.")
-    print(f"Response: {response}")
-    print(f"Tokens — input: {in_tok}, output: {out_tok}")
+    response, in_tok, out_tok = call(
+        "Say 'API connection successful' and nothing else.",
+        max_tokens=20,
+    )
+    print(f"Response  : {response.strip()}")
+    print(f"Tokens    — input: {in_tok}, output: {out_tok}")
     print("Connection OK.")
 
 

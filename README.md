@@ -20,6 +20,7 @@ The study compares three core prompting paradigms — zero-shot, few-shot, and c
 1. How do zero-shot, few-shot, and chain-of-thought prompting compare in accuracy and quality across task types?
 2. Does the optimal prompting technique vary by task domain (QA vs. summarisation vs. reasoning)?
 3. What design principles generalise across techniques to improve LLM performance?
+4. **(Novel contribution)** Can prompts be improved *automatically* from their own failure cases, and can per-instance adaptive technique selection match chain-of-thought accuracy at a fraction of its token cost?
 
 ---
 
@@ -108,6 +109,20 @@ The study compares three core prompting paradigms — zero-shot, few-shot, and c
 **Few-shot** — The prompt includes a small number of worked examples (typically 2–8) before the target query. Measures how demonstration context improves performance.
 
 **Chain-of-Thought (CoT)** — The prompt encourages the model to reason step-by-step before giving a final answer. Particularly effective for multi-step reasoning tasks.
+
+---
+
+## Novel Contributions (PEEF Modules 5 & 6)
+
+Beyond the static technique comparison, the framework contributes two adaptive methods:
+
+**Module 5 — Reflexive Prompt Optimizer** (`05_code/src/prompt_optimizer.py`)
+A closed-loop *evaluate → reflect → mutate → select* engine. The LLM diagnoses its own dev-set failures, proposes rewritten templates, and a candidate replaces the champion **only if it wins a paired bootstrap significance test (p < α)** — a statistical promotion gate that prevents dev-set noise from being mistaken for improvement (a guard typically absent from prior automatic-prompting work such as APE and OPRO). Every critique, candidate, score, and promotion decision is written to a reproducible audit-trail JSON, with a full token/cost ledger and hard budget cap.
+
+**Module 6 — Adaptive Cascade** (`05_code/src/adaptive_cascade.py`)
+Instead of asking "which technique is best on average?", the cascade decides **per question**: it samples a cheap zero-shot prompt *k* times, uses self-consistency agreement as a confidence estimate, and escalates to chain-of-thought only when the model disagrees with itself. The confidence threshold is a tunable accuracy/cost dial, and a replay utility derives the full escalation-rate curve without extra API calls.
+
+Both modules accept an injectable `call_fn`, so the entire test suite (`05_code/tests/`) runs offline with no API key. End-to-end demo: `02_experiments/combined_techniques/run_adaptive_experiments.py`.
 
 ---
 
