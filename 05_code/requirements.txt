@@ -18,8 +18,10 @@ scipy>=1.12.0
 matplotlib>=3.8.0
 seaborn>=0.13.0
 
-# Optional: dashboard (R7)
-# streamlit>=1.35.0
+# Dashboard (R7)
+streamlit>=1.35.0
+plotly>=5.20.0
+Pillow>=10.0.0
 
 # Testing
 pytest>=8.0.0
