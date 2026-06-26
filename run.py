@@ -62,6 +62,36 @@ FEW_SHOT_EXAMPLES: dict[str, list[dict]] = {
             "summary": "Global electric vehicle sales exceeded 10 million in 2023, with China dominating the market. Falling battery costs, down 90% over a decade, are making EVs increasingly cost-competitive with traditional vehicles.",
             "key_points": "1. 10 million EVs sold globally in 2023. 2. China leads with 6 million units. 3. Battery costs fell 90% over 10 years.",
         },
+        {
+            "article": "Researchers at MIT have developed a new battery technology that can charge electric vehicles in just 10 minutes. The battery uses lithium iron phosphate cells with a novel heating mechanism that allows rapid charging without degrading the battery. The breakthrough could significantly accelerate the adoption of electric vehicles worldwide.",
+            "summary": "MIT researchers have created a battery enabling 10-minute EV charging using lithium iron phosphate cells with a novel heating mechanism that prevents degradation. This breakthrough could accelerate global EV adoption.",
+            "key_points": "1. 10-minute EV charging achieved. 2. Lithium iron phosphate cells used. 3. Heating mechanism prevents battery damage.",
+        },
+        {
+            "article": "A new study published in Nature reports that global deforestation rates have slowed by 10% over the past decade due to conservation efforts in Brazil and Indonesia. However, scientists warn that the remaining tropical forests face increasing pressure from agricultural expansion and logging. The Amazon rainforest alone lost 11,568 square kilometres in 2022.",
+            "summary": "Global deforestation has slowed 10% over a decade thanks to conservation efforts in Brazil and Indonesia, yet remaining tropical forests face growing threats. The Amazon lost over 11,500 square kilometres in 2022.",
+            "key_points": "1. Deforestation slowed 10% globally. 2. Conservation efforts in Brazil and Indonesia key. 3. Amazon lost 11,568 km² in 2022.",
+        },
+        {
+            "article": "A clinical trial involving 50,000 participants confirmed that regular exercise significantly reduces type 2 diabetes risk. People who engaged in at least 150 minutes of moderate activity per week were 35% less likely to develop the condition. Combining exercise with a healthy diet proved more effective than either intervention alone.",
+            "summary": "A 50,000-person trial found that 150 minutes of moderate weekly exercise reduces type 2 diabetes risk by 35%. Combining exercise with a healthy diet offered the greatest protection.",
+            "key_points": "1. 150 min/week exercise cuts diabetes risk by 35%. 2. Study involved 50,000 participants. 3. Exercise plus diet most effective combination.",
+        },
+        {
+            "article": "NASA's James Webb Space Telescope has captured the most detailed image ever taken of a star-forming region. The telescope's infrared cameras revealed thousands of previously unseen young stars in the Carina Nebula, located 7,600 light-years from Earth. The images provide new insights into how stars and planetary systems form.",
+            "summary": "The James Webb Space Telescope has revealed thousands of previously unseen young stars in the Carina Nebula 7,600 light-years away. The unprecedented images deepen our understanding of how stars and planetary systems are born.",
+            "key_points": "1. Webb captures clearest star-forming region images. 2. Thousands of new young stars revealed. 3. Carina Nebula is 7,600 light-years from Earth.",
+        },
+        {
+            "article": "The International Monetary Fund revised its 2024 global growth forecast upward to 3.2%, citing stronger-than-expected performances in the United States and India. China's economy grew by 5.2%, beating initial projections. However, high debt in developing nations and ongoing geopolitical tensions represent significant downside risks.",
+            "summary": "The IMF raised its 2024 global growth forecast to 3.2%, driven by strong US, Indian, and Chinese economic performance. High developing-nation debt and geopolitical tensions remain key downside risks.",
+            "key_points": "1. IMF projects 3.2% global growth. 2. US, India, and China outperformed. 3. Debt and geopolitics pose downside risks.",
+        },
+        {
+            "article": "A UNESCO report reveals that 244 million children worldwide still lack access to education, with sub-Saharan Africa accounting for the majority of out-of-school children. Poverty, conflict, and distance from schools are the primary barriers. UNESCO is calling on governments to increase education budgets and invest in distance learning technologies.",
+            "summary": "UNESCO reports 244 million children remain out of school globally, with sub-Saharan Africa most affected. The agency urges governments to raise education budgets and expand distance learning to overcome barriers of poverty, conflict, and geography.",
+            "key_points": "1. 244 million children lack education access. 2. Sub-Saharan Africa most affected. 3. UNESCO urges budget increases and distance learning.",
+        },
     ],
     "reasoning": [
         {"problem": "If a train travels at 60 mph for 2 hours, how far does it travel?",      "answer": "120", "working": "Distance = speed × time = 60 × 2 = 120 miles."},
@@ -152,7 +182,7 @@ def main() -> None:
     # 4. Save summary
     output_file = Path(config.get("output_file", f"03_results/raw/{config_path.stem}.jsonl"))
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_file, "w") as f:
+    with open(output_file, "a") as f:          # "a" = append; safe to re-run with larger n
         for r in results:
             import dataclasses
             f.write(json.dumps(dataclasses.asdict(r)) + "\n")

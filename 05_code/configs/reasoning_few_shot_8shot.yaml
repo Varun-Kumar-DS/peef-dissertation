@@ -1,11 +1,11 @@
-name: reasoning_zero_shot
+name: reasoning_few_shot_8shot
 task: reasoning
-technique: zero_shot
-n_shots: 0
+technique: few_shot
+n_shots: 8
 dataset: gsm8k
 dataset_split: test
 sample_size: 1319
 model: claude-haiku-4-5-20251001
 temperature: 0.0
 max_tokens: 128
-output_file: 03_results/raw/reasoning_zero_shot.jsonl
+output_file: 03_results/raw/reasoning_few_shot_8shot.jsonl
