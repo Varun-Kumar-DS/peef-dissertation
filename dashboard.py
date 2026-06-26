@@ -57,18 +57,24 @@ COLOURS = {
 TECH_ORDER = ["Zero-Shot", "Few-Shot (4)", "CoT", "Zero-Shot CoT"]
 
 TECH_LABELS: dict[str, str] = {
-    "qa_zero_shot":                   "Zero-Shot",
-    "qa_few_shot_4shot":              "Few-Shot (4)",
-    "qa_cot":                         "CoT",
-    "qa_zero_shot_cot":               "Zero-Shot CoT",
-    "summarisation_zero_shot":        "Zero-Shot",
-    "summarisation_few_shot_4shot":   "Few-Shot (4)",
-    "summarisation_cot":              "CoT",
-    "summarisation_zero_shot_cot":    "Zero-Shot CoT",
-    "reasoning_zero_shot":            "Zero-Shot",
-    "reasoning_few_shot_4shot":       "Few-Shot (4)",
-    "reasoning_cot":                  "CoT",
-    "reasoning_zero_shot_cot":        "Zero-Shot CoT",
+    "qa_zero_shot":                              "Zero-Shot",
+    "qa_few_shot_2shot":                         "Few-Shot (2)",
+    "qa_few_shot_4shot":                         "Few-Shot (4)",
+    "qa_few_shot_8shot":                         "Few-Shot (8)",
+    "qa_cot":                                    "CoT",
+    "qa_zero_shot_cot":                          "Zero-Shot CoT",
+    "summarisation_zero_shot":                   "Zero-Shot",
+    "summarisation_few_shot_4shot":              "Few-Shot (2)",
+    "summarisation_few_shot_4shot_corrected":    "Few-Shot (4)",
+    "summarisation_few_shot_8shot":              "Few-Shot (8)",
+    "summarisation_cot":                         "CoT",
+    "summarisation_zero_shot_cot":               "Zero-Shot CoT",
+    "reasoning_zero_shot":                       "Zero-Shot",
+    "reasoning_few_shot_2shot":                  "Few-Shot (2)",
+    "reasoning_few_shot_4shot":                  "Few-Shot (4)",
+    "reasoning_few_shot_8shot":                  "Few-Shot (8)",
+    "reasoning_cot":                             "CoT",
+    "reasoning_zero_shot_cot":                   "Zero-Shot CoT",
 }
 
 TASK_DISPLAY = {
@@ -1055,9 +1061,11 @@ elif page == "🔬  Statistics":
             sorted_means = sorted(means.items(), key=lambda x: -x[1])
             medals       = ["🥇", "🥈", "🥉", "4️⃣"]
 
-            # Gauge row
+            # Gauge row — dynamic column count based on number of experiments
             st.markdown(f'<div class="sec-head"><span class="ico">📊</span> Mean {metric_name} Scores</div>', unsafe_allow_html=True)
-            mc = st.columns(4)
+            n_exp  = len(sorted_means)
+            medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"][:n_exp]
+            mc = st.columns(n_exp)
             for i, (exp, val) in enumerate(sorted_means):
                 tech  = TECH_LABELS.get(exp, exp)
                 color = COLOURS.get(tech, "#64748B")
