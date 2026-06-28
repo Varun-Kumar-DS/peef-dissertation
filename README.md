@@ -7,6 +7,14 @@
 
 ---
 
+## 🔗 Live Dashboard
+
+**[https://peef-dashboard.streamlit.app/](https://peef-dashboard.streamlit.app/)**
+
+Interactive results dashboard — no installation needed, open directly in browser.
+
+---
+
 ## Overview
 
 This project investigates how large language models (LLMs) can be used most effectively through systematic evaluation of prompt engineering techniques. The central research question is: **which prompting strategies produce the best outcomes across different task types?**
