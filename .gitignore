@@ -34,5 +34,8 @@ node_modules/
 .DS_Store
 
 # API keys / secrets
+
+# Word temp files
+~$*
 *.pem
 secrets.yaml
