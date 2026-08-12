@@ -105,7 +105,7 @@ st.markdown("""
     background: linear-gradient(180deg, #020617 0%, #0D1117 60%, #111827 100%) !important;
     border-right: 1px solid rgba(255,255,255,0.04);
 }
-[data-testid="stSidebar"] * { color: #6B7280 !important; }
+[data-testid="stSidebar"] * { color: #94A3B8 !important; }
 [data-testid="stSidebar"] strong { color: #D1D5DB !important; }
 [data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.06) !important; }
 [data-testid="stSidebar"] .stRadio > label > div > p {
@@ -178,8 +178,8 @@ st.markdown("""
     border-top: 1px solid rgba(255,255,255,0.07);
     margin: 1.2rem 0 0.85rem;
 }
-.hero-meta { font-size: 0.78rem; color: #475569 !important; }
-.hero-meta strong { color: #6B7280 !important; }
+.hero-meta { font-size: 0.78rem; color: #CBD5E1 !important; }
+.hero-meta strong { color: #FFFFFF !important; }
 
 /* ── Section heading ── */
 .sec-head {
@@ -397,7 +397,7 @@ st.markdown("""
 /* ── Footer ── */
 .footer {
     text-align: center;
-    color: #374151;
+    color: #64748B;
     font-size: 0.74rem;
     padding: 2.5rem 0 0.5rem;
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -473,7 +473,7 @@ def make_gauge(value: float, title: str, color: str,
         title={"text": title, "font": {"size": 11, "color": "#64748B"}},
         gauge={
             "axis": {"range": [0, max_val], "tickcolor": "#334155",
-                     "tickfont": {"color": "#475569", "size": 10}},
+                     "tickfont": {"color": "#94A3B8", "size": 10}},
             "bar":  {"color": color, "thickness": 0.28},
             "bgcolor": "rgba(0,0,0,0)",
             "borderwidth": 0,
@@ -535,7 +535,7 @@ def make_radar() -> go.Figure:
                 visible=True,
                 range=[0, 1],
                 tickvals=[0.25, 0.50, 0.75, 1.0],
-                tickfont=dict(size=9, color="#475569"),
+                tickfont=dict(size=9, color="#94A3B8"),
                 gridcolor="rgba(255,255,255,0.07)",
                 linecolor="rgba(255,255,255,0.07)",
             ),
@@ -580,7 +580,7 @@ def make_bar_chart(task_df: pd.DataFrame, is_em: bool, metric_name: str) -> go.F
             x=[tech],
             y=[score],
             error_y=dict(type="data", array=[err], visible=True,
-                         color="#475569", thickness=2, width=9),
+                         color="#94A3B8", thickness=2, width=9),
             marker=dict(
                 color=COLOURS[tech],
                 line=dict(color="rgba(255,255,255,0.15)", width=1.5),
@@ -606,7 +606,7 @@ def make_bar_chart(task_df: pd.DataFrame, is_em: bool, metric_name: str) -> go.F
             range=[0, min(y_max + 0.18, 1.05)],
             tickformat=".2f",
             title_font=dict(size=12, color="#64748B"),
-            tickfont=dict(color="#475569", size=11),
+            tickfont=dict(color="#94A3B8", size=11),
             linecolor="rgba(255,255,255,0.06)",
         ),
         xaxis=dict(
@@ -632,7 +632,7 @@ with st.sidebar:
         <div style='font-size:3rem; margin-bottom:0.4rem; filter:drop-shadow(0 0 12px rgba(96,165,250,0.5));'>🔬</div>
         <div style='font-size:1.2rem; font-weight:900; color:#E2E8F0 !important;
                     letter-spacing:0.08em;'>PEEF</div>
-        <div style='font-size:0.68rem; color:#374151 !important; font-weight:500;
+        <div style='font-size:0.68rem; color:#94A3B8 !important; font-weight:500;
                     line-height:1.6; margin-top:0.25rem;'>
             Prompt Engineering<br>Evaluation Framework
         </div>
@@ -650,17 +650,17 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("""
     <div style='font-size:0.76rem; line-height:2.1;'>
-        <div style='color:#374151 !important; font-weight:700; font-size:0.63rem;
+        <div style='color:#60A5FA !important; font-weight:700; font-size:0.63rem;
                     text-transform:uppercase; letter-spacing:0.09em; margin-bottom:0.3rem;'>
             Project Details
         </div>
-        <div style='color:#4B5563 !important;'>🎓 &nbsp;University of Liverpool</div>
-        <div style='color:#4B5563 !important;'>📚 &nbsp;MSc Computer Science</div>
-        <div style='color:#4B5563 !important;'>👨‍🏫 &nbsp;A. Koufonikos</div>
-        <div style='color:#4B5563 !important; font-family:monospace !important; font-size:0.69rem;'>
+        <div style='color:#CBD5E1 !important;'>🎓 &nbsp;University of Liverpool</div>
+        <div style='color:#CBD5E1 !important;'>📚 &nbsp;MSc Computer Science</div>
+        <div style='color:#CBD5E1 !important;'>👨‍🏫 &nbsp;A. Koufonikos</div>
+        <div style='color:#CBD5E1 !important; font-family:monospace !important; font-size:0.69rem;'>
             🤖 &nbsp;claude-haiku-4-5
         </div>
-        <div style='color:#4B5563 !important;'>📅 &nbsp;Jun – Aug 2026</div>
+        <div style='color:#CBD5E1 !important;'>📅 &nbsp;Jun – Aug 2026</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -747,7 +747,7 @@ if page == "🏠  Home":
         line-height:1; margin-bottom:5px;
         font-variant-numeric: tabular-nums;
       }
-      .sub { font-size:10.5px; color:#374151; font-weight:500; }
+      .sub { font-size:10.5px; color:#94A3B8; font-weight:500; }
     </style>
     </head><body>
     <div class="grid">
@@ -816,7 +816,7 @@ if page == "🏠  Home":
                             use_container_width=True)
             # subtitle below gauge
             sub = "ROUGE-L F1 × 100" if "Summarisation" in title else "Exact Match Accuracy"
-            st.markdown(f"<p style='text-align:center;font-size:0.75rem;color:#374151;margin-top:-0.5rem;'>{sub}</p>",
+            st.markdown(f"<p style='text-align:center;font-size:0.75rem;color:#94A3B8;margin-top:-0.5rem;'>{sub}</p>",
                         unsafe_allow_html=True)
 
     # ── Radar chart ───────────────────────────────────────────────────────────
@@ -884,7 +884,7 @@ if page == "🏠  Home":
             st.markdown(f"""
             <div class="glass">
                 <h4 style='margin-bottom:0.2rem;'>{task_name}</h4>
-                <p style='font-size:0.72rem; color:#374151; margin-bottom:0.9rem;'>{metric}</p>
+                <p style='font-size:0.72rem; color:#94A3B8; margin-bottom:0.9rem;'>{metric}</p>
                 {score_cards}
             </div>""", unsafe_allow_html=True)
 
@@ -1077,7 +1077,7 @@ elif page == "🔬  Statistics":
                         <div class="badge" style="background:{color}; margin-bottom:0.55rem;">{tech}</div>
                         <div style="font-size:1.75rem; font-weight:900; color:{color};
                                     line-height:1; margin-bottom:0.2rem;">{val:.4f}</div>
-                        <div style="font-size:0.74rem; color:#374151;">{val*100:.1f} %</div>
+                        <div style="font-size:0.74rem; color:#94A3B8;">{val*100:.1f} %</div>
                     </div>""", unsafe_allow_html=True)
 
             # Pairwise table
@@ -1101,7 +1101,7 @@ elif page == "🔬  Statistics":
             st.dataframe(pd.DataFrame(pair_rows), hide_index=True, use_container_width=True)
 
             st.markdown("""
-            <p style='color:#374151; font-size:0.76rem; margin-top:0.5rem;'>
+            <p style='color:#94A3B8; font-size:0.76rem; margin-top:0.5rem;'>
             <strong style='color:#64748B;'>Significance:</strong>
             *** p&lt;0.001 &nbsp;·&nbsp; ** p&lt;0.01 &nbsp;·&nbsp;
             * p&lt;0.05 &nbsp;·&nbsp; ns = not significant &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -1213,7 +1213,7 @@ elif page == "⚙️  Framework":
                 <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem;">
                     <span style="font-size:1.1rem;">{icon}</span>
                     <h4 style="margin:0; color:{color};">{name}</h4>
-                    <span style="font-size:0.68rem; color:#374151;">({task})</span>
+                    <span style="font-size:0.68rem; color:#94A3B8;">({task})</span>
                 </div>
                 <p style="font-size:0.83rem;">{desc}</p>
             </div>""", unsafe_allow_html=True)
