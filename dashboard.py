@@ -773,7 +773,7 @@ if page == "🏠  Home":
         <div class="icon">⚡</div>
         <div class="label">Total API Calls</div>
         <div class="value" id="v4">0</div>
-        <div class="sub">Claude Haiku model</div>
+        <div class="sub">Claude Haiku model · est.</div>
       </div>
     </div>
     <script>
@@ -792,7 +792,7 @@ if page == "🏠  Home":
       animateCount(document.getElementById('v1'), 4,     900);
       animateCount(document.getElementById('v2'), 3,     900);
       animateCount(document.getElementById('v3'), 18,    900);
-      animateCount(document.getElementById('v4'), 14914, 1400);
+      animateCount(document.getElementById('v4'), 15900, 1400);
     }, 350);
     </script>
     </body></html>
