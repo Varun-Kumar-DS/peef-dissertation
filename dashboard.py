@@ -503,10 +503,10 @@ def make_radar() -> go.Figure:
     """Radar / spider chart comparing all 4 techniques across all 3 tasks."""
     categories = ["QA<br>(Exact Match)", "Summarisation<br>(ROUGE-L ×10)", "Reasoning<br>(Exact Match)"]
     data = {
-        "Zero-Shot":     [0.670, 0.238 * 10, 0.650],
-        "Few-Shot (4)":  [0.700, 0.227 * 10, 0.575],
-        "CoT":           [0.660, 0.205 * 10, 0.900],
-        "Zero-Shot CoT": [0.365, 0.202 * 10, 0.825],
+        "Zero-Shot":     [0.674, 0.2402 * 10, 0.6338],
+        "Few-Shot (4)":  [0.706, 0.2267 * 10, 0.5701],
+        "CoT":           [0.666, 0.2034 * 10, 0.9052],
+        "Zero-Shot CoT": [0.396, 0.2048 * 10, 0.8279],
     }
     # rgba fill colours (Plotly needs rgba, not 8-digit hex)
     fill_colours = {
@@ -767,7 +767,7 @@ if page == "🏠  Home":
         <div class="icon">⚗️</div>
         <div class="label">Experiments Run</div>
         <div class="value" id="v3">0</div>
-        <div class="sub">200 samples each experiment</div>
+        <div class="sub">500 / 300 / 1,319 samples</div>
       </div>
       <div class="kpi">
         <div class="icon">⚡</div>
@@ -789,10 +789,10 @@ if page == "🏠  Home":
       requestAnimationFrame(tick);
     }
     setTimeout(() => {
-      animateCount(document.getElementById('v1'), 4,    900);
-      animateCount(document.getElementById('v2'), 3,    900);
-      animateCount(document.getElementById('v3'), 12,   900);
-      animateCount(document.getElementById('v4'), 2400, 1400);
+      animateCount(document.getElementById('v1'), 4,     900);
+      animateCount(document.getElementById('v2'), 3,     900);
+      animateCount(document.getElementById('v3'), 18,    900);
+      animateCount(document.getElementById('v4'), 14914, 1400);
     }, 350);
     </script>
     </body></html>
@@ -806,9 +806,9 @@ if page == "🏠  Home":
     gc1, gc2, gc3 = st.columns(3)
 
     gauges = [
-        (70.0, "🟢 Few-Shot (4) — QA",          "#009E73", "%",   100),
-        (23.8, "🔵 Zero-Shot — Summarisation",   "#0072B2", "",    40),
-        (90.0, "🔴 CoT — Mathematical Reasoning","#D55E00", "%",   100),
+        (70.6, "🟢 Few-Shot (4) — QA",          "#009E73", "%",   100),
+        (24.0, "🔵 Zero-Shot — Summarisation",   "#0072B2", "",    40),
+        (90.5, "🔴 CoT — Mathematical Reasoning","#D55E00", "%",   100),
     ]
     for col, (val, title, color, suffix, max_val) in zip([gc1, gc2, gc3], gauges):
         with col:
@@ -848,22 +848,22 @@ if page == "🏠  Home":
 
     glance = [
         ("📚 Question Answering", "Exact Match Accuracy", [
-            ("Few-Shot (4)",  "#009E73", "70.0%"),
-            ("Zero-Shot",     "#0072B2", "67.0%"),
-            ("CoT",           "#D55E00", "66.0%"),
-            ("Zero-Shot CoT", "#CC79A7", "36.5%"),
+            ("Few-Shot (4)",  "#009E73", "70.6%"),
+            ("Zero-Shot",     "#0072B2", "67.4%"),
+            ("CoT",           "#D55E00", "66.6%"),
+            ("Zero-Shot CoT", "#CC79A7", "39.6%"),
         ]),
         ("📰 Summarisation", "ROUGE-L F1 Score", [
-            ("Zero-Shot",     "#0072B2", "0.238"),
+            ("Zero-Shot",     "#0072B2", "0.240"),
             ("Few-Shot (4)",  "#009E73", "0.227"),
-            ("CoT",           "#D55E00", "0.205"),
-            ("Zero-Shot CoT", "#CC79A7", "0.202"),
+            ("CoT",           "#D55E00", "0.203"),
+            ("Zero-Shot CoT", "#CC79A7", "0.205"),
         ]),
         ("🔢 Mathematical Reasoning", "Exact Match Accuracy", [
-            ("CoT",           "#D55E00", "90.0%"),
-            ("Zero-Shot CoT", "#CC79A7", "82.5%"),
-            ("Zero-Shot",     "#0072B2", "65.0%"),
-            ("Few-Shot (4)",  "#009E73", "57.5%"),
+            ("CoT",           "#D55E00", "90.5%"),
+            ("Zero-Shot CoT", "#CC79A7", "82.8%"),
+            ("Zero-Shot",     "#0072B2", "63.4%"),
+            ("Few-Shot (4)",  "#009E73", "57.0%"),
         ]),
     ]
 
@@ -895,18 +895,19 @@ if page == "🏠  Home":
     findings = [
         ("#D55E00",
          "🔢 CoT dominates Mathematical Reasoning",
-         "Chain-of-Thought achieved <strong style='color:#FCA5A5;'>90%</strong> on GSM8K — "
-         "the highest score across all 12 experiments. Statistically significant vs every other "
-         "technique (p&lt;0.001, Cohen's d=0.79). Extends Wei et al. (2022) to Anthropic Claude."),
+         "Chain-of-Thought achieved <strong style='color:#FCA5A5;'>90.5%</strong> on GSM8K — "
+         "the highest score across all 18 experiments. Statistically significant vs Zero-Shot "
+         "(p&lt;0.001, Cohen's d=0.68). Extends Wei et al. (2022) to Anthropic Claude."),
         ("#0072B2",
          "📰 Zero-Shot wins Summarisation",
-         "Simpler prompts outperformed complex ones (ROUGE-L=0.238). Zero-Shot beat CoT with "
-         "medium effect size (d=0.52, p&lt;0.001). Additional instructions can <em>hurt</em> "
+         "Simpler prompts outperformed complex ones (ROUGE-L=0.240). Zero-Shot beat CoT with "
+         "medium effect size (d=0.56, p&lt;0.001). Additional instructions can <em>hurt</em> "
          "creative generation tasks."),
         ("#009E73",
-         "📚 QA: No statistically significant winner",
-         "Top 3 QA techniques — Few-Shot (70%), Zero-Shot (67%), CoT (66%) — no significant "
-         "pairwise differences (all p&gt;0.10). Claude handles factual QA well with any style."),
+         "📚 QA: Significant but not meaningful",
+         "Top 3 QA techniques — Few-Shot (70.6%), Zero-Shot (67.4%), CoT (66.6%). Few-Shot's edge "
+         "over Zero-Shot is technically significant (p=0.018) but the effect size is negligible "
+         "(d=0.07) — not practically meaningful. Zero-Shot is 7× cheaper for equivalent results."),
         ("#8B5CF6",
          "⚡ Task–technique fit is the core finding",
          "No single technique dominated across all tasks. CoT is essential for reasoning but "
@@ -938,7 +939,7 @@ if page == "🏠  Home":
 elif page == "📊  Results":
 
     st.markdown('<div class="page-title">📊 Experiment Results</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-sub">All 12 experiments · 4 techniques × 3 tasks · 200 samples each</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-sub">18 experiments · 4 technique families × 3 tasks · 500 / 300 / 1,319 samples</div>', unsafe_allow_html=True)
     st.markdown('<hr class="page-hr">', unsafe_allow_html=True)
 
     f1, f2 = st.columns(2)
@@ -1201,11 +1202,11 @@ elif page == "⚙️  Framework":
     with dc1:
         for icon, color, name, task, desc in [
             ("📚", "#3B82F6", "TriviaQA",       "Question Answering",
-             "Open-domain factual QA · 200 test samples · Metric: Exact Match"),
+             "Open-domain factual QA · 500 test samples · Metric: Exact Match"),
             ("📰", "#8B5CF6", "CNN/DailyMail",  "Summarisation",
-             "News article summarisation · 200 samples · Metric: ROUGE-L F1"),
+             "News article summarisation · 300 samples · Metric: ROUGE-L F1"),
             ("🔢", "#10B981", "GSM8K",           "Mathematical Reasoning",
-             "Grade-school maths word problems · 200 samples · Metric: Exact Match"),
+             "Grade-school maths word problems · 1,319 samples · Metric: Exact Match"),
         ]:
             st.markdown(f"""
             <div class="glass" style="border-left:4px solid {color};">
